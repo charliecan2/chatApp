@@ -4,6 +4,7 @@ import { Server } from 'socket.io';
 import cors from 'cors';
 import config from 'config';
 import logger from './utils/logger';
+import socket from './socket'
 
 const PORT = config.get<number>('port');
 const host = config.get<string>('host');
@@ -23,5 +24,7 @@ const io = new Server(httpServer, {
 app.get('/', (_, res) => res.send('Server is up!'))
 
 httpServer.listen(PORT, host, () => {
-    logger.info(`Server is listening in on PORT: ${PORT}`)
+    logger.info(`Server is listening in on PORT: ${PORT}`);
+
+    socket({ io });
 })
