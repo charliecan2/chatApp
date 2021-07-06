@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
@@ -8,6 +8,11 @@ import RoomsContainer from '../containers/Rooms'
 import MessagesContaier from '../containers/Messages'
 
 export default function Home() {
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    setUsername(storedUsername);
+  }, [])
+
   const {socket, username, setUsername} = useSockets();
 
   const usernameRef = useRef(null)
@@ -25,14 +30,18 @@ export default function Home() {
   return (
     <div>
 
-      {!username && 
-        <div>
-          <input placeholder="Username" ref={usernameRef} />
-          <button onClick={handleSetUsername}>START</button>
-        </div>}
-
-      <RoomsContainer />
-      <MessagesContaier />
+      {!username && (
+        <div className={styles.usernameWrapper}>
+          <div className={styles.usernameInner}>
+            <input placeholder="Username" ref={usernameRef} />
+            <button onClick={handleSetUsername}>START</button>
+          </div>
+        </div>)}
+      {username && (
+      <div className={styles.container}>
+        <RoomsContainer />
+        <MessagesContaier />
+      </div>)}
     </div>
   )
 }
