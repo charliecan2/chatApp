@@ -23,6 +23,10 @@ function RoomsContainer(){
                 <input placeholder="Room name" ref={newRoomRef} />
                 <button onClick={handleCreateRoom}>CREATE ROOM</button>
             </div>
+
+            {Object.keys(rooms).map((key) => {
+                return <div key={key}>{rooms[key].name}</div>;
+            })}
         </nav>
     )
 };
