@@ -4,23 +4,28 @@ import { SOCKET_URL } from '../config/default';
 
 interface Context {
     socket: Socket;
-    username? :string
-    setUsername: Function
+    username? :string;
+    setUsername: Function;
+    roomId?: string;
+    rooms: object
 }
 
 const socket = io(SOCKET_URL);
 
 const SocketContext = createContext<Context>({
     socket, 
-    setUsername: () => false
+    setUsername: () => false,
+    rooms: {}
 });
 
 function SocketsProvider(props: any){
     const [username, setUsername] = useState("");
+    const [roomId, setRoomId] = useState("");
+    const [rooms, setRooms] = useState([]);
 
     return (
     <SocketContext.Provider 
-    value={{socket, username, setUsername}} 
+    value={{socket, username, setUsername, rooms, roomId}} 
     {...props} 
     />
     )
