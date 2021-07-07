@@ -21,10 +21,12 @@ function MessagesContaier(){
         setMessages([
             ...messages,{
                 username: 'You',
-                messages,
+                message,
                 time: `${date.getHours()}:${date.getMinutes()}`,
             }
-        ])
+        ]);
+
+        newMessageRef.current.value = '';
     }
 
     if(!roomId){
@@ -43,6 +45,7 @@ function MessagesContaier(){
             placeholder="Tell us what's on your mind"
             ref={newMessageRef}
             />
+            <button onClick={handleSendMessage}>SEND</button>
         </div>
     </div>)
 };
