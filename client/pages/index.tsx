@@ -8,13 +8,7 @@ import RoomsContainer from '../containers/Rooms'
 import MessagesContaier from '../containers/Messages'
 
 export default function Home() {
-  useEffect(() => {
-    const storedUsername = localStorage.getItem('username');
-    setUsername(storedUsername);
-  }, [])
-
   const {socket, username, setUsername} = useSockets();
-
   const usernameRef = useRef(null)
 
   const handleSetUsername = () => {
@@ -26,6 +20,11 @@ export default function Home() {
 
     localStorage.setItem("username", value)
   }
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    setUsername(storedUsername);
+  }, [])
 
   return (
     <div>
