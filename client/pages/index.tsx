@@ -28,12 +28,11 @@ export default function Home() {
 
   return (
     <div>
-
       {!username && (
         <div className={styles.usernameWrapper}>
           <div className={styles.usernameInner}>
             <input placeholder="Username" ref={usernameRef} />
-            <button onClick={handleSetUsername}>START</button>
+            <button className="cta" onClick={handleSetUsername}>START</button>
           </div>
         </div>)}
       {username && (
